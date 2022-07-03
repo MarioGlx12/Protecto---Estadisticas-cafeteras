@@ -1,0 +1,273 @@
+---
+title: "Proyecto 1, Estadisticas cafeteras Notebook"
+output: html_notebook
+---
+
+Primeramente debemos importar los datos, estos se encuentran en diversos archivos excel y debemos tener presente en que parte se encuentran ubicados, pues su ruta de ubicación es fundamental para ser importados.
+
+Podemos importarlos desde la interfaz de RStudio, en el apartado de Environment podremos encontrar una opción llamada "Import Dataser" si presionamos sobre ella se varias opciones la cuales indican que tipo de archivo se va a importar, seleccionaremos "From excel" y se desplegará una nueva ventana, en ella haremos click sobre Browse y ubicaremos el archivo que queremos subir, luego de seleccionaralo aparecerá una vista previa y le hacemos click importar.
+
+Si lo anterior te parecio muy engorroso podremos ejecutar una linea de comandos que hace practicamente lo mismo:
+
+library(readxl)\
+dataset \<- read_excel(NULL)\
+View(dataset)
+
+En el sección NULL que esta contenida entre parentesis es donde debemos indicar la ubicación del archivo excel a subir, por ejemplo:
+
+library(readxl)\
+Copia_de_1\_Precio_Interno_Diario \<- read_excel("Proyecto PLE/Archivos Excel/Copia de 1. Precio Interno Diario.xlsx")\
+View(Copia_de_1\_Precio_Interno_Diario)
+
+Es importante contar las librerias ggplot2 y dplyr ya instaladas, pues son fundamentales para el funcionamiento del codigo y la realización de sus respectivas graficas.
+
+Una vez importados todos los archivos a emplear procedermos a realizar el respectivo análisis estadístico.
+
+Empecemos por observar la media y desviación estandar del precio interno del cafe por decadas:
+
+```{r}
+library(dplyr)
+
+Copia_de_2_Precio_Interno_Mensual$Mes <- as.Date(Copia_de_2_Precio_Interno_Mensual$Mes)
+
+Copia_de_2_Precio_Interno_Mensual %>% 
+  select(Mes,`Precio interno`) %>% 
+  filter(Copia_de_2_Precio_Interno_Mensual$Mes >= "1944-01-01"  & Copia_de_2_Precio_Interno_Mensual$Mes <= "1954-01-01") %>% 
+  summarise(Promedio_Precio_Interno_decada_1944_a_1954 = mean(`Precio interno`), Desviacion_estandar_Precio_Interno_decada_1944_a_1954 = sd(`Precio interno`))
+
+
+```
+
+```{r}
+Copia_de_2_Precio_Interno_Mensual %>% 
+  select(Mes,`Precio interno`) %>% 
+  filter(Copia_de_2_Precio_Interno_Mensual$Mes >= "1954-01-01"  & Copia_de_2_Precio_Interno_Mensual$Mes <= "1964-01-01") %>% 
+  summarise(Promedio_Precio_Interno_decada_1954_a_1964 = mean(`Precio interno`), Desviacion_estandar_Precio_Interno_decada_1954_a_1964 = sd(`Precio interno`))
+```
+
+```{r}
+Copia_de_2_Precio_Interno_Mensual %>% 
+  select(Mes,`Precio interno`) %>% 
+  filter(Copia_de_2_Precio_Interno_Mensual$Mes >= "1964-01-01"  & Copia_de_2_Precio_Interno_Mensual$Mes <= "1974-01-01") %>% 
+  summarise(Promedio_Precio_Interno_decada_1964_a_1974 = mean(`Precio interno`), Desviacion_estandar_Precio_Interno_decada_1964_a_1974 = sd(`Precio interno`))
+```
+
+```{r}
+Copia_de_2_Precio_Interno_Mensual %>% 
+  select(Mes,`Precio interno`) %>% 
+  filter(Copia_de_2_Precio_Interno_Mensual$Mes >= "1974-01-01"  & Copia_de_2_Precio_Interno_Mensual$Mes <= "1984-01-01") %>% 
+  summarise(Promedio_Precio_Interno_decada_1974_a_1984 = mean(`Precio interno`), Desviacion_estandar_Precio_Interno_decada_1974_a_1984 = sd(`Precio interno`))
+```
+
+```{r}
+Copia_de_2_Precio_Interno_Mensual %>% 
+  select(Mes,`Precio interno`) %>% 
+  filter(Copia_de_2_Precio_Interno_Mensual$Mes >= "1984-01-01"  & Copia_de_2_Precio_Interno_Mensual$Mes <= "1994-01-01") %>% 
+  summarise(Promedio_Precio_Interno_decada_1984_a_1994 = mean(`Precio interno`), Desviacion_estandar_Precio_Interno_decada_1984_a_1994 = sd(`Precio interno`))
+```
+
+```{r}
+Copia_de_2_Precio_Interno_Mensual %>% 
+  select(Mes,`Precio interno`) %>% 
+  filter(Copia_de_2_Precio_Interno_Mensual$Mes >= "1994-01-01"  & Copia_de_2_Precio_Interno_Mensual$Mes <= "2004-01-01") %>% 
+  summarise(Promedio_Precio_Interno_decada_1994_a_2004 = mean(`Precio interno`), Desviacion_estandar_Precio_Interno_decada_1994_a_2004 = sd(`Precio interno`))
+```
+
+```{r}
+Copia_de_2_Precio_Interno_Mensual %>% 
+  select(Mes,`Precio interno`) %>% 
+  filter(Copia_de_2_Precio_Interno_Mensual$Mes >= "2004-01-01"  & Copia_de_2_Precio_Interno_Mensual$Mes <= "2014-01-01") %>% 
+  summarise(Promedio_Precio_Interno_decada_2004_a_2014 = mean(`Precio interno`), Desviacion_estandar_Precio_Interno_decada_2004_a_2014 = sd(`Precio interno`))
+```
+
+```{r}
+Copia_de_2_Precio_Interno_Mensual %>% 
+  select(Mes,`Precio interno`) %>% 
+  filter(Copia_de_2_Precio_Interno_Mensual$Mes >= "2014-01-01"  & Copia_de_2_Precio_Interno_Mensual$Mes <= "2022-01-01") %>% 
+  summarise(Promedio_Precio_Interno_de_2014_a_2022 = mean(`Precio interno`), Desviacion_estandar_Precio_Interno_decada_2014_a_2022 = sd(`Precio interno`))
+```
+
+Grafica de la variación del precio interno del cafe - mensual
+
+```{r}
+plot(data.frame(Copia_de_2_Precio_Interno_Mensual$Mes, Copia_de_2_Precio_Interno_Mensual$`Precio interno`),xlab ="años", ylab = "Precio interno del cafe", type = "l")
+```
+
+Grafica de la variación del precio externo del cafe - mensual
+
+```{r}
+plot(data.frame(Copia_de_3_Precio_Ex_Dock_Mensual$Mes, Copia_de_3_Precio_Ex_Dock_Mensual$`Precio externo`),xlab ="años", ylab = "Precio externo del cafe", type = "l")
+```
+
+Subconjunto de datos por decadas:
+
+```{r}
+library(ggplot2)
+library(dplyr)
+
+library(readxl)
+
+Copia_de_2_Precio_Interno_Mensual$Mes <- as.Date(Copia_de_2_Precio_Interno_Mensual$Mes)
+
+df1=Copia_de_2_Precio_Interno_Mensual %>% 
+  select(Mes,`Precio interno`) %>% 
+  filter(Copia_de_2_Precio_Interno_Mensual$Mes >= "1944-01-01"  & Copia_de_2_Precio_Interno_Mensual$Mes <= "1954-01-01")
+
+df2=Copia_de_2_Precio_Interno_Mensual %>% 
+  select(Mes,`Precio interno`) %>% 
+  filter(Copia_de_2_Precio_Interno_Mensual$Mes >= "1954-01-01"  & Copia_de_2_Precio_Interno_Mensual$Mes <= "1964-01-01")
+
+df3=Copia_de_2_Precio_Interno_Mensual %>% 
+  select(Mes,`Precio interno`) %>% 
+  filter(Copia_de_2_Precio_Interno_Mensual$Mes >= "1964-01-01"  & Copia_de_2_Precio_Interno_Mensual$Mes <= "1974-01-01")
+
+df4=Copia_de_2_Precio_Interno_Mensual %>% 
+  select(Mes,`Precio interno`) %>% 
+  filter(Copia_de_2_Precio_Interno_Mensual$Mes >= "1974-01-01"  & Copia_de_2_Precio_Interno_Mensual$Mes <= "1984-01-01")
+
+df5=Copia_de_2_Precio_Interno_Mensual %>% 
+  select(Mes,`Precio interno`) %>% 
+  filter(Copia_de_2_Precio_Interno_Mensual$Mes >= "1984-01-01"  & Copia_de_2_Precio_Interno_Mensual$Mes <= "1994-01-01")
+
+df6=Copia_de_2_Precio_Interno_Mensual %>% 
+  select(Mes,`Precio interno`) %>% 
+  filter(Copia_de_2_Precio_Interno_Mensual$Mes >= "1994-01-01"  & Copia_de_2_Precio_Interno_Mensual$Mes <= "2004-01-01")
+
+df7=Copia_de_2_Precio_Interno_Mensual %>% 
+  select(Mes,`Precio interno`) %>% 
+  filter(Copia_de_2_Precio_Interno_Mensual$Mes >= "2004-01-01"  & Copia_de_2_Precio_Interno_Mensual$Mes <= "2014-01-01")
+
+df8=Copia_de_2_Precio_Interno_Mensual %>% 
+  select(Mes,`Precio interno`) %>% 
+  filter(Copia_de_2_Precio_Interno_Mensual$Mes >= "2014-01-01"  & Copia_de_2_Precio_Interno_Mensual$Mes <= "2022-01-01")
+
+
+```
+
+Diagrama de dispersión precio interno mesual del cafe de 1944 a 2022:
+
+```{r}
+Copia_de_2_Precio_Interno_Mensual %>% 
+  select(Mes,`Precio interno`) %>% 
+  ggplot(aes(x=Copia_de_2_Precio_Interno_Mensual$Mes,y=`Precio interno`))+geom_point()
+```
+
+Diagrama de dispersión precio interno mesual del cafe de 1944 a 1954:
+
+```{r}
+df1 %>% 
+  select(Mes,`Precio interno`) %>% 
+  ggplot(aes(x=df1$Mes,y=`Precio interno`))+geom_point()
+```
+
+Diagrama de dispersión precio interno mesual del cafe de 1954 a 1964:
+
+```{r}
+df2 %>% 
+  select(Mes,`Precio interno`) %>% 
+  ggplot(aes(x=df2$Mes,y=`Precio interno`))+geom_point()
+```
+
+Diagrama de dispersión precio interno mesual del cafe de 1964 a 1974:
+
+```{r}
+df3 %>% 
+  select(Mes,`Precio interno`) %>% 
+  ggplot(aes(x=df3$Mes,y=`Precio interno`))+geom_point()
+```
+
+Diagrama de dispersión precio interno mesual del cafe de 1974 a 1984:
+
+```{r}
+df4 %>% 
+  select(Mes,`Precio interno`) %>% 
+  ggplot(aes(x=df4$Mes,y=`Precio interno`))+geom_point()
+```
+
+Diagrama de dispersión precio interno mesual del cafe de 1984 a 1994:
+
+```{r}
+df5 %>% 
+  select(Mes,`Precio interno`) %>% 
+  ggplot(aes(x=df5$Mes,y=`Precio interno`))+geom_point()
+```
+
+Diagrama de dispersión precio interno mesual del cafe de 1994 a 2004:
+
+```{r}
+df6 %>% 
+  select(Mes,`Precio interno`) %>% 
+  ggplot(aes(x=df6$Mes,y=`Precio interno`))+geom_point()
+```
+
+Diagrama de dispersión precio interno mesual del cafe de 2004 a 2014:
+
+```{r}
+df7 %>% 
+  select(Mes,`Precio interno`) %>% 
+  ggplot(aes(x=df7$Mes,y=`Precio interno`))+geom_point()
+```
+
+Diagrama de dispersión precio interno mesual del cafe de 2014 a 2022:
+
+```{r}
+df8 %>% 
+  select(Mes,`Precio interno`) %>% 
+  ggplot(aes(x=df8$Mes,y=`Precio interno`))+geom_point()
+```
+
+Pruebas estadisticas, tstudent:
+
+```{r}
+test1=t.test(df1$`Precio interno`,df2$`Precio interno`)
+print(test1) #test 1944 - 1954 vs 1954 - 1964.
+```
+
+```{r}
+test2=t.test(df2$`Precio interno`,df3$`Precio interno`)
+print(test2) #test 1954 - 1964 vs test 1964 - 1974.
+
+```
+
+```{r}
+test3=t.test(df3$`Precio interno`,df4$`Precio interno`)
+print(test3) #test 1964 - 1974 vs test 1974 - 1984.
+```
+
+```{r}
+test4=t.test(df4$`Precio interno`,df5$`Precio interno`)
+print(test4) #test 1974 - 1984 vs test 1984 - 1994.
+```
+
+```{r}
+test5=t.test(df5$`Precio interno`,df6$`Precio interno`)
+print(test5) #test 1984 - 1994 vs test 1994 - 2004.
+```
+
+```{r}
+test6=t.test(df6$`Precio interno`,df7$`Precio interno`)
+print(test6) #test 1994 - 2004 vs test 2004 - 2014.
+```
+
+```{r}
+test7=t.test(df7$`Precio interno`,df8$`Precio interno`)
+print(test7) #test 2004 - 2014 vs test 2014 - 2022.
+```
+
+Grafica volumén total de exportacion de cafe - mensual:
+
+```{r}
+plot(data.frame(Volumen_de_las_exportaciones_colombianas_de_cafe_mensual$MES, Volumen_de_las_exportaciones_colombianas_de_cafe_mensual$`Total Exportaciones`),xlab ="años", ylab = "Volumén exportacion de cafe", type = "l")
+```
+
+Grafica producción de cafe mensual:
+
+```{r}
+plot(data.frame(Copia_de_9_Produccion_mensual$Mes, Copia_de_9_Produccion_mensual$Producción),xlab ="años", ylab = "Producción de cafe", type = "l")
+```
+
+Grafica mejores areas de producción de café en Colombia:
+
+```{r}
+barplot(height = depProducto$MilesHectDep, names = depProducto$Departamento)
+```
